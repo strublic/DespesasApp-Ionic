@@ -6,25 +6,37 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { DespesaProvider } from '../providers/despesa/despesa';
+import { AddPage } from '../pages/add/add';
+import { LocalStorageModule } from 'angular-2-local-storage';
+
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    AddPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    LocalStorageModule.withConfig({
+      prefix: 'despesasApp',
+      storageType: 'localStorage'
+    })
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    AddPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    DespesaProvider
   ]
 })
 export class AppModule {}
